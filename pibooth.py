@@ -2,6 +2,7 @@ import tkinter as tk
 import tkinter.ttk as ttk
 from time import sleep
 
+
 class Start(tk.Frame):
     def __init__(self, parent, controller):
         tk.Frame.__init__(self, parent)
@@ -31,11 +32,20 @@ class CameraCapture(tk.Frame):
 class PrintPreview(tk.Frame):
     def __init__(self, parent, controller):
         tk.Frame.__init__(self, parent)
+        frame1 = tk.Frame(self, width=267, height=160, bg='red')
+        frame2 = tk.Frame(self, width=267, height=160, bg='green')
+        frame3 = tk.Frame(self, width=266, height=160, bg='blue')
+        frame1.grid(row=0, column=0, sticky='nsew')
+        frame2.grid(row=0, column=1, sticky='nsew')
+        frame3.grid(row=0, column=2, sticky='nsew')
         label = tk.Label(self, text='Print Preview')
-        label.pack(pady=10,padx=10)
+        label.grid(row=1, column = 1, padx=10, pady=10)
 
-        button = tk.Button(self, text='Print', command=self.print_photos)
-        button.pack()
+        button = tk.Button(self, text='Print',
+                           width=20,
+                           font=('helvetica',20,'bold'),
+                           command=self.print_photos)
+        button.grid(row=2, column=1)
         self.controller = controller
 
     def print_photos(self):
@@ -48,7 +58,8 @@ class PrintPreview(tk.Frame):
 class BoothApp(tk.Tk):
     def __init__(self):
         super().__init__()
-        
+        self.title('Welcome to PiBooth')
+        self.geometry('800x480')
         container = tk.Frame(self)
         container.pack(side='top', fill='both', expand=True)
         container.grid_rowconfigure(0, weight=1)
